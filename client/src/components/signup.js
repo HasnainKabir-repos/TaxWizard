@@ -6,8 +6,10 @@ import backgroundImage from "../images/tax.png";
 
 
 function Signup() {
-    const [formData, setFormData] = useState({ name: '', email: '', password: '' });
+    const [formData, setFormData] = useState({ name: '',dob: '', email: '', password: '' });
     const [emailValid, setEmailValid] = useState(true);
+
+
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -66,56 +68,64 @@ function Signup() {
             height: '100%',
             padding: '0 5%', // Adjust padding to move the form more to the center-right
         },
+
         container: {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            padding: "20px",
+            padding: "10px", // Reduced padding
             border: "1px solid white",
             borderRadius: "5px",
             boxShadow: "0px 0px 8px green",
             maxWidth: "400px",
             width: '100%', // Make it responsive
-            background: "#e9edeb",//"#7CABA1",
+            background: "#e9edeb",
           },
- 
+        
+          input: {
+            margin: '5px 0', // Reduced margin
+            padding: '5px 10px', // Reduced padding
+            borderRadius: '5px',
+            width: '93%', // Make the input full-width
+          },
         logo: {
             width: '150px', // Adjust as needed
             marginBottom: '20px', // Space between logo and sign up text
         },
-        input: {
-            margin: '10px 0',
-            padding: '10px 15px',
-            borderRadius: '5px',
-            width: '90%'
-        },
+        // input: {
+        //     margin: '10px 0',
+        //     padding: '10px 15px',
+        //     borderRadius: '5px',
+        //     width: '90%'
+        // },
         button1: {
-            padding: "8px 16px", // Adjusted padding
-            background: "transparent", // Transparent background
-            color: "white", // Text color
-            fontWeight: "bold", // Bold text
-            fontSize: "1.1rem", // Slightly larger font size
+            padding: "5px 10px", // Adjusted padding
+            background: "transparent",
+            color: "white",
+            fontWeight: "bold",
+            fontSize: "1rem", // Reduced font size
             borderRadius: "5px",
-            border: "2px solid white", // White border
+            border: "2px solid white",
             cursor: "pointer",
-            marginTop: "10px",
-            marginBottom: "10px",
-            width: "99%", // Make the button a little smaller than the inputs
-            backgroundColor: "#0A7B79", // Button color
+            marginTop: "5px",
+            marginBottom: "5px",
+            width: "100%", // Make the button full-width
+            backgroundColor: "#0A7B79",
           },
+        
           button2: {
-            padding: "8px 16px", // Adjusted padding
-            background: "transparent", // Transparent background
-            color: "white", // Text color
-            fontWeight: "bold", // Bold text
-            fontSize: "1.1rem", // Slightly larger font size
+            padding: "5px 10px", // Adjusted padding
+            background: "transparent",
+            color: "white",
+            fontWeight: "bold",
+            fontSize: "1rem", // Reduced font size
             borderRadius: "5px",
-            border: "2px solid white", // White border
+            border: "2px solid white",
             cursor: "pointer",
-            marginTop: "10px",
-            marginBottom: "10px",
-            width: "99%", // Make the button a little smaller than the inputs
-            backgroundColor: "#0A7B79", // Button color
+            marginTop: "5px",
+            marginBottom: "5px",
+            width: "100%", // Make the button full-width
+            backgroundColor: "#0A7B79",
           },
            
         h2: {
@@ -165,6 +175,24 @@ function Signup() {
                     <h2 style={styles.h2}> Sign Up</h2>
                     <form onSubmit={handleSubmit}>
                 <input style={styles.input} type="text" name="name" placeholder="Name" onChange={handleChange} required />
+                                {/* <input
+                    style={styles.input}
+                    type="date"
+                    name="dob" // Use "dob" as the name for the date of birth field
+                    placeholder="Date of Birth (YYYY-MM-DD)"
+                    onChange={handleChange}
+                    required
+                /> */}
+                                <input
+                style={styles.input}
+                type="date"
+                name="dob"
+                placeholder="Date of Birth (YYYY-MM-DD)"
+                onChange={handleChange}
+                value={formData.dob}
+                required
+                />
+
                 <input style={styles.input} type="email" name="email" placeholder="Email" onChange={handleChange} required />
                 {!emailValid && <p style={{ color: 'red' }}>Invalid email format</p>}
                 <input style={styles.input} type="password" name="password" placeholder="Password" onChange={handleChange} required />
