@@ -55,7 +55,7 @@ function Signup() {
             width: '50%',
             height: '100%',
             backgroundImage: `url(${backgroundImage})`,
-            backgroundSize: 'cover',
+            backgroundSize: 'contain',
             backgroundPosition: 'center',
         },
         formSide: {
@@ -67,17 +67,18 @@ function Signup() {
             padding: '0 5%', // Adjust padding to move the form more to the center-right
         },
         container: {
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            padding: '20px',
-            border: '1px solid white',
-            borderRadius: '5px',
-            boxShadow: '0px 0px 8px white',
-            maxWidth: '400px',
-            width: '100%',
-            background: '#7CABA1',
-        },
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            padding: "20px",
+            border: "1px solid white",
+            borderRadius: "5px",
+            boxShadow: "0px 0px 8px green",
+            maxWidth: "400px",
+            width: '100%', // Make it responsive
+            background: "#e9edeb",//"#7CABA1",
+          },
+ 
         logo: {
             width: '150px', // Adjust as needed
             marginBottom: '20px', // Space between logo and sign up text

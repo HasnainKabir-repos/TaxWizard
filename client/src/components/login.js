@@ -54,15 +54,14 @@ function Login() {
       padding: "20px",
       border: "1px solid white",
       borderRadius: "5px",
-      boxShadow: "0px 0px 8px white",
+      boxShadow: "0px 0px 8px green",
       maxWidth: "400px",
       width: '100%', // Make it responsive
-      background: "#7CABA1",
+      background: "#e9edeb",//"#7CABA1",
     },
     imageContainer: {
-      maxWidth: "50%", // Adjust the size as needed
-      maxHeight: "100vh",
-      width: '100%',
+      display: 'flex',
+      width: '50%',
       height: '100%',
       backgroundImage: `url(${backgroundImage})`,
       backgroundSize: 'cover',

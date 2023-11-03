@@ -1,0 +1,47 @@
+/* Header.css */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: #7CABA1;
+    color: white;
+  }
+  
+  .logo {
+    font-size: 1.5rem; /* Increased font size for visibility */
+    font-weight: bold; /* Make the text bold */
+    color: #ffffff; /* Set the text color to white */
+    text-shadow: 1px 1px 2px #0A7B79; /* Add a subtle shadow with a color that matches the header */
+    transition: transform 0.3s ease-in-out; /* Smooth transition for any transformation */
+  }
+  
+  .logo:hover {
+    transform: scale(1.05); /* Slightly increase size on hover */
+  }
+  
+  .navbar a {
+    text-decoration: none;
+    font-weight: bolder;
+    color: white;
+    margin-left: 20px;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .navbar a:hover {
+    color: #0A7B79;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .navbar {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+  
+    .navbar a {
+      margin-bottom: 10px;
+    }
+  }
+  

@@ -1,19 +1,40 @@
 import React, { useState } from 'react';
+import Header from './Header';
 
+// const gridContainerStyle = {
+//   display: 'grid',
+//   gridTemplateColumns: '1fr 1fr',
+//   gap: '20px',
+//   maxWidth: '1200px',
+//   margin: 'auto',
+//   padding: '15px',
+// };
+  
 const gridContainerStyle = {
-  display: 'grid',
-  gridTemplateColumns: '1fr 1fr',
-  gap: '20px',
-  maxWidth: '1200px',
-  margin: 'auto',
-  padding: '15px',
-};
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr', // Two columns of equal width
+    gap: '20px',
+    maxWidth: '1200px',
+    width: '100%', // Added width property
+    margin: 'auto',
+    padding: '15px',
+  };
+  
+  const pageWrapperStyle = {
+    display: 'grid', // Two columns taking up the whole page
+    width: '100vw', // Make it take the full width of the viewport
+    height: '100vh', // Make it take the full height of the viewport
+    margin: '0', // Remove any margin
+    background: '#7CABA1', // Background color
+  };
+  
 
 const columnStyle = {
   border: '1px solid #ddd',
   borderRadius: '4px',
   padding: '20px',
   boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+  background: '#7CABA1', // Background colo
 };
 
 const inputStyle = {
@@ -30,16 +51,29 @@ const selectStyle = {
   height: '40px',
 };
 
+const incomeInputStyle = {
+    padding: '10px',
+    fontSize: '16px',
+    border: '1px solid #ddd',
+    borderRadius: '4px',
+    width: '96%',
+    marginBottom: '15px',
+  };
+  const h1Style = {
+    color: 'white', // Text color
+    transition: 'color 0.3s ease-in-out', // Add a color transition
+  };
+
 const buttonStyle = {
-  padding: '10px 15px',
-  fontSize: '16px',
-  color: 'white',
-  backgroundColor: '#007bff',
-  border: 'none',
-  borderRadius: '4px',
-  cursor: 'pointer',
-  width: '100%',
-};
+    padding: '8px 16px', // Adjusted padding
+    fontSize: '1.1rem', // Slightly larger font size
+    color: 'white',
+    backgroundColor: '#0A7B79', // Button color
+    border: '2px solid white', // White border
+    borderRadius: '4px',
+    cursor: 'pointer',
+    width: '100%',
+  };
 
 const taxListStyle = {
   ...columnStyle,
@@ -71,9 +105,13 @@ const TaxDashboard = () => {
   };
 
   return (
+    <div>
+        <Header/>
+    <div style={pageWrapperStyle}>
     <div style={gridContainerStyle}>
       <div style={columnStyle}>
-        <h1>Tax Calculation Dashboard</h1>
+        {/* <h1>Tax Calculation Dashboard</h1> */}
+        <h1 style={h1Style}>Tax Calculation Dashboard</h1>
         <form onSubmit={calculateTax}>
           <div>
             <label htmlFor="income">Income:</label>
@@ -81,7 +119,7 @@ const TaxDashboard = () => {
               type="number"
               id="income"
               placeholder="Enter your income"
-              style={inputStyle}
+              style={incomeInputStyle}
               value={income}
               onChange={(e) => setIncome(e.target.value)}
             />
@@ -128,7 +166,7 @@ const TaxDashboard = () => {
         )}
       </div>
       <div style={taxListStyle}>
-        <h3>Calculated Taxes by Year</h3>
+        <h3 style={h1Style}>Calculated Taxes by Year</h3>
         <ul>
           {taxRecords.map((record, index) => (
             <li key={index}>
@@ -138,6 +176,8 @@ const TaxDashboard = () => {
         </ul>
       </div>
     </div>
+</div>
+</div>
   );
 };
 
