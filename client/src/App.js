@@ -8,7 +8,6 @@ import {
 
 import Login from "../src/components/login.js";
 import Signup from "../src/components/signup.js";
-import Hello from "/Users/shadmansakib/Desktop/TaxWizard/client/src/components/dashboard.js";
 
 function App() {
   return (
