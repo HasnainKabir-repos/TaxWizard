@@ -8,7 +8,7 @@ require('body-parser');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 const authRoutes = require('./server/routes/auth.route');
-const taxRoutes = require('./server/routes/taxroute.js');
+const taxRoutes = require('./server/routes/taxRoute.js');
 app.use(cors({
     origin: "http://localhost:3000",
     methods: ["GET", "POST"],
