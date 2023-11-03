@@ -10,6 +10,39 @@ function Signup() {
     const [formData, setFormData] = useState({ Name: '', DateOfBirth: '', Email: '', Password: '' });
     const [emailValid, setEmailValid] = useState(true);
 
+    const handleDateChange = (e) => {
+        const { name, value } = e.target;
+      
+        if (name === 'email') {
+          const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+          setEmailValid(emailRegex.test(value));
+        } else if (name === 'DateOfBirth') {
+          // Check if the date of birth is in the correct format (YYYY-MM-DD)
+          const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+          if (!dateRegex.test(value)) {
+            // Invalid date format, don't update the state
+            setFormData({ ...formData, DateOfBirth: value });
+            return;
+          }
+      
+          // Get the current year
+          const currentYear = new Date().getFullYear();
+          // Extract the year part from the input value
+          const yearPart = parseInt(value.split('-')[0], 10);
+      
+          if (yearPart > currentYear) {
+            // Invalid year, display error message
+            setFormData({ ...formData, DateOfBirth: value, dateError: "Can't born in the future" });
+          } else {
+            // Valid date, clear error message
+            setFormData({ ...formData, DateOfBirth: value, dateError: '' });
+          }
+        } else {
+          setFormData({ ...formData, [name]: value });
+        }
+      };
+      
+
 
 
     const handleChange = (e) => {
@@ -185,15 +218,28 @@ function Signup() {
                     onChange={handleChange}
                     required
                 /> */}
-                                <input
+                                {/* <input
                 style={styles.input}
                 type="date"
                 name="DateOfBirth"
                 placeholder="Date of Birth (YYYY-MM-DD)"
-                onChange={handleChange}
+                onChange={handleDateChange}
                 value={formData.DateOfBirth}
                 required
-                />
+                /> */}
+
+<input
+              style={styles.input}
+              type="date"
+              name="DateOfBirth"
+              placeholder="Date of Birth (YYYY-MM-DD)"
+              onChange={handleDateChange}
+              value={formData.DateOfBirth}
+              required
+            />
+            {formData.dateError && (
+              <p style={{ color: 'red' }}>{formData.dateError}</p>
+            )}
 
                 <input style={styles.input} type="email" name="Email" placeholder="Email" onChange={handleChange} required />
                 {!emailValid && <p style={{ color: 'red' }}>Invalid email format</p>}
