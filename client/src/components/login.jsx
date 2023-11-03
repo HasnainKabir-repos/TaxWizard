@@ -3,7 +3,6 @@ import axios from "axios";
 import logo from "../images/logo.png";
 import backgroundImage from "../images/tax.png";
 
-
 function Login() {
   const [formData, setFormData] = useState({ Email: "", Password: "" });
 
@@ -21,7 +20,7 @@ function Login() {
     try {
       const response = await axios.post(
         "http://localhost:9000/api/auth/login",
-        formData,
+        formData
       );
       console.log(response);
       if (response.data) {
@@ -120,6 +119,7 @@ function Login() {
     },
   };
 
+ 
   return (
     <div style={styles.pageWrapper}>
       <div style={styles.imageContainer}></div>
@@ -132,7 +132,7 @@ function Login() {
           <input
             style={styles.input}
             type="email"
-            name="Email"
+            name="email" // Make sure the name is "email"
             placeholder="Email"
             onChange={handleChange}
             required
