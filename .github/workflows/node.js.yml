@@ -34,3 +34,10 @@ jobs:
 
     - name: Run test cases
       run: npm test 
+
+    - name: Navigate to React app
+      run: cd client
+
+    - name: Install dependencies
+      run: npm install
+    
