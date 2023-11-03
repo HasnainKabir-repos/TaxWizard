@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 require('dotenv').config();
 const passwordComplexity = require('joi-password-complexity');
-const passport = require("passport");
 
 const generateAuthToken = ( user) => {
     const token = jwt.sign({_id:user._id},process.env.JWTPRIVATEKEY,{expiresIn:"7d"});
@@ -21,14 +20,52 @@ const validateSignUp = (data) => {
     return schema.validate(data);
 };
 
-const loginUser = async( req, res) => {
-    passport.authenticate('local', { session: false }, (err, user) => {
-        if (err || !user) {
-            return res.status(401).json({ message: 'Authentication failed.' });
+const validateEmailPass = (data) => {
+    const schema = Joi.object({
+      Email: Joi.string().email().required().label("Email"),
+      Password: Joi.string().required().label("Password"),
+    });
+  
+    return schema.validate(data);
+  };
+
+  
+const findUser = async(req) => {
+    const user = await User.findOne({ Email: req.body.Email });
+    return user;
+};
+
+const logout = async(req, res) => {
+    res.clearCookie('jwt');
+    res.status(200).send({message: "Logged out successfully"});
+};
+
+const loginUser = async(req, res) => {
+    try {
+        const { error } = validateEmailPass(req.body);
+        if (error)
+          return res.status(400).send({ message: error.details[0].message });
+    
+        const user = await findUser(req);
+        if (!user) {
+          return res.status(400).send({ message: "User not Exists" });
+        }
+        console.log(req.body.Password);
+        console.log(user.Password);
+        const validPassword = await bcrypt.compare(
+          req.body.Password,
+          user.Password
+        );
+        if (!validPassword) {
+          return res.status(400).send({ message: "Invalid Password" });
         }
         const token = generateAuthToken(user);
-        return res.status(200).json({ token });
-    })
+        res.cookie('jwt', token, { httpOnly: true });
+        res.status(200).send({ data: token, message: "Login Successful" });
+      } catch (error) {
+        console.log(error); 
+        res.status(500).send({ message: "Internal Server Error" });
+      }
 };
 
 const generateSalt = async() => {
@@ -52,7 +89,8 @@ const signupUser = async (req, res) => {
         if (error)
             return res.status(400).send({ message: error.details[0].message });
 
-        const user = await User.exists({ Email: req.body.Email });
+        console.log(User);
+        const user = await User.findOne({ Email: req.body.Email });
         if (user)
             return res.status(400).send({ message: "User already registered" });
 
@@ -74,5 +112,7 @@ module.exports = {
     loginUser,
     generateSalt,
     generateHashPassword,
-    signupUser
+    signupUser,
+    validateEmailPass,
+    logout
 };

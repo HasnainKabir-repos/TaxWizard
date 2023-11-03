@@ -1,13 +1,10 @@
 const supertest = require('supertest');
-const {server, closeServer} = require('../../server');
 const app = require('../../app');
 const chai = require('chai');
 const expect = chai.expect;
-
+require('dotenv').config();
 describe('Testing root of project', () =>{
-    after( () => {
-         closeServer();
-    });
+    
     it("should return a 200 status code" , (done) => {
         supertest(app)
         .get('/')

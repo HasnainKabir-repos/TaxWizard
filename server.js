@@ -9,8 +9,8 @@ const server = app.listen(port, () => console.log(`Listening on port ${port}`));
 
 connectToDatabase(process.env.MONGO_URI);
 
-const closeServer = () => {
-    disconnectToDatabase();
+const closeServer = async() => {
+    await disconnectToDatabase();
     server.close();
 };
 module.exports = {server, closeServer};

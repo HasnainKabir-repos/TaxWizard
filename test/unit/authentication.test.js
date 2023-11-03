@@ -10,6 +10,7 @@ const {
   validateSignUp,
   generateSalt,
   generateHashPassword,
+  validateEmailPass
 } = require("../../server/controller/authentication.controller");
 
 describe("authentication bcrypt controller", () => {
@@ -68,3 +69,51 @@ describe("validateSignUp", () => {
     expect(validationResult.error).to.exist;
   });
 });
+
+describe('Login Input Validation', () => {
+    it('should validate a valid email and password', () => {
+      const data = {
+        Email: 'test@example.com',
+        Password: 'password123',
+      };
+  
+      const { error, value } = validateEmailPass(data);
+  
+      expect(error).to.be.undefined;
+      expect(value).to.deep.equal(data);
+    });
+  
+    it('should reject invalid email format', () => {
+      const data = {
+        Email: 'invalid-email',
+        Password: 'password123',
+      };
+  
+      const { error, value } = validateEmailPass(data);
+  
+      expect(error).to.not.be.null;
+      expect(error.details[0].message).to.include('Email');
+    });
+  
+    it('should reject missing email', () => {
+      const data = {
+        Password: 'password123',
+      };
+  
+      const { error } = validateEmailPass(data);
+  
+      expect(error).to.not.be.null;
+      expect(error.details[0].message).to.include('Email');
+    });
+  
+    it('should reject missing password', () => {
+      const data = {
+        Email: 'test@example.com',
+      };
+  
+      const { error } = validateEmailPass(data);
+  
+      expect(error).to.not.be.null;
+      expect(error.details[0].message).to.include('Password');
+    });
+  });

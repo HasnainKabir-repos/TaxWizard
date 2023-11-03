@@ -1,91 +1,53 @@
-const supertest = require("supertest");
-const {server, closeServer} = require('../../server');
-const app = require('../../app');
+const chai = require('chai');
+const app = require('../../app'); 
+const expect = chai.expect;
+const mongoose =require('mongoose');
+const supertest = require('supertest');
+describe('Authentication API Endpoints', () => {
+  before((done) =>{
+    mongoose.connect(process.env.MONGO_URI);
+    done();
+  });
+  it('should register a new user', () => {
+    
+      supertest(app)
+      .post('/api/auth/signup')
+      .send({
+        Name: "Test",
+        Email: 'newuser@gmail.com',
+        DateOfBirth: "1985-05-15T00:00:00.000Z",
+        Password: 'Password123@',
+      }).expect(200)
+      .end((err, res) => {
 
-describe('Integration test authentication', () => {
-    after( () => {
-        closeServer();
-   });
-    // it('should signup for a user', (done) => {
-
-    //     const data = {
-    //         body:{
-    //             Name:"Test",
-    //             Email:"Test@gmail.com",
-    //             DateOfBirth:"1990-05-15",
-    //             Password: "Testing123@"
-    //         }
-           
-    //     };
-
-    //     supertest(app)
-    //       .post('/api/auth/signup') 
-    //       .send( data ) 
-    //       .expect(201)
-    //       .end((err, res) => {
-    //         if (err) return done(err);
-    //         done();
-    //       });
-
-    // });
-    it('should handle existing user during signup', (done) => {
-        const data = {
-            body:{
-                Name:"Test",
-                Email:"Test@gmail.com",
-                DateOfBirth:"1990-05-15",
-                Password: "Testing123@"
-            }  
-        };
-      
-        supertest(app)
-          .post('/api/auth/signup')
-          .send(data)
-          .expect(400) 
-          .end((err, res) => {
-            if (err) console.log(err);
-            done();
-          });
-    });
-    it('should successfully log in for a user', (done) => {
-
-        const data = {
-            body:{
-                Email:"test@gmail.com",
-                Password: "Testing123@"
-            }
-           
-        };
-
-        supertest(app)
-          .post('/api/auth/login') 
-          .send( data ) 
-          .expect(200)
-          .end((err, res) => {
-            if (err) console.log(err);
-            done();
-          });
-
-          
-    });
-    it('should handle invalid login credentials', (done) => {
-        const invalidCredentials = {
-            body:{
-                Email: "test@gmail.com",
-                Password: "IncorrectPassword"
-            }
-          
-        };
-      
-        supertest(app)
-          .post('/api/auth/login')
-          .send(invalidCredentials)
-          .expect(401) // Expect a 401 Unauthorized status
-          .end((err, res) => {
-            if (err) console.log(err);
-            done();
-          });
-          
+        expect(res.body).to.have.property('message', 'User registered successfully');
+        
       });
-      
+  });
+
+  it('should login an existing user', () => {
+    
+      supertest(app)
+      .post('/api/auth/login')
+      .send({
+        Email: 'newuser@gmail.com', // Use the username created in the previous test case
+        Password: 'Password123@',
+      }).expect(200)
+      .end((err, res) => {
+        expect(res.body).to.have.property('token');
+        
+      });
+  });
+
+  it('should log out a user', () => {
+    
+      supertest(app)
+      .get('/api/auth/logout')
+      .expect(200)
+      .end((err, res) => {
+        expect(res.body).to.have.property('message', 'Logged out successfully');
+        
+      });
+  });
 });
+
