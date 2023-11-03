@@ -1,13 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const Tax = require('../models/Tax.model'); 
-const User = require('../models/User.model');
-const checkLoggedIn = require('../middleware/isAuthenticated');
 
-router.post("/calculateTax", checkLoggedIn, async (req, res) => {
+router.post("/calculateTax", async (req, res) => {
   try {
-    const { income, gender, location} = req.body;
-    const { userinfo } = req.user;
+    const { income, gender, location } = req.body;
 
     if (typeof income !== "number" || income < 0) {
       return res.status(400).json({
@@ -29,20 +25,13 @@ router.post("/calculateTax", checkLoggedIn, async (req, res) => {
       });
     }
 
-    // Calculate tax-free income based on gender
+    
     let taxFreeIncome = (gender === "female" || gender === "senior") ? 400000 : 350000;
-    // Calculate taxable income
+    
     let taxableIncome = Math.max(0, income - taxFreeIncome);
-    // Initialize tax
+   
     let tax = 0;
 
-    // Check if the user exists
-    const user = await User.findONe({Email: userinfo.Email});
-    if (!user) {
-      return res.status(404).json({ error: "User not found." });
-    }
-
-    // If taxable income is more than 0, calculate the tax, else set tax to 0
     if (taxableIncome > 0) {
       const taxRates = [
         { threshold: 100000, rate: 0.05 },
@@ -61,34 +50,21 @@ router.post("/calculateTax", checkLoggedIn, async (req, res) => {
         if (remainingIncome <= 0) break;
       }
 
-      let minimumTax = location === "Dhaka" || location === "Chattogram" ? 5000 : 
-                       location === "OtherCity" ? 4000 : 3000;
+      let minimumTax = location === "Dhaka" || location === "Chattogram" ? 5000 :
+        location === "OtherCity" ? 4000 : 3000;
       tax = Math.max(tax, minimumTax);
     }
 
-    // Create a new tax record with the calculated values
-    const taxRecord = new Tax({
-      user: userId, // Linking the tax record to the user
-      income,
-      gender,
-      location,
-      taxFreeIncome,
-      taxableIncome,
-      tax // This is the calculated tax
-    });
-
-    // Save the tax record to the database
-    await taxRecord.save();
-
-    // Respond with the tax record and a success message
+    // Respond with the calculated tax
     res.json({
-      message: "Tax data saved successfully.",
-      taxData: taxRecord
+      message: "Tax calculated successfully.",
+      taxAmount: tax,
+      taxableIncome: taxableIncome,
     });
 
   } catch (error) {
     console.error("Server error on /calculateTax:", error);
-    res.status(500).json({ error: "An error occurred while calculating the tax and saving the data." });
+    res.status(500).json({ error: "An error occurred while calculating the tax." });
   }
 });
 

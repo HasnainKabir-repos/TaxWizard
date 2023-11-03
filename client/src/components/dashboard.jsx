@@ -9,7 +9,6 @@ import Header from './Header';
 //   margin: 'auto',
 //   padding: '15px',
 // };
-
   
 const gridContainerStyle = {
     display: 'grid',
@@ -86,46 +85,33 @@ const TaxDashboard = () => {
   const [income, setIncome] = useState('');
   const [gender, setGender] = useState('');
   const [calculatedTax, setCalculatedTax] = useState(null);
+  const [taxRecords, setTaxRecords] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
 
-  const calculateTax = async (event) => {
+  const calculateTax = (event) => {
     event.preventDefault();
-    setIsLoading(true);
+    // Placeholder for actual tax calculation logic
+    const taxRate = 0.25; // Assume a flat tax rate for simplicity
+    const tax = parseFloat(income) * taxRate;
+    setCalculatedTax(tax);
 
-    try {
-      const response = await fetch('http://localhost:9000/api/calculateTax', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          income: parseFloat(income),
-          gender,
-          location: selectedLocation,
-        }),
-        
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      setCalculatedTax(data.tax);
-    } catch (error) {
-      console.error('There was an error calculating the tax:', error);
-    } finally {
-      setIsLoading(false);
-    }
+    // Add the tax record to the list
+    const newRecord = {
+      year: new Date().getFullYear(),
+      tax: tax,
+      location: selectedLocation,
+    };
+    setTaxRecords([...taxRecords, newRecord]);
   };
+
   return (
     <div>
         <Header/>
     <div style={pageWrapperStyle}>
     <div style={gridContainerStyle}>
       <div style={columnStyle}>
-        <h1>Tax Calculator</h1>
+        {/* <h1>Tax Calculation Dashboard</h1> */}
+        <h1 style={h1Style}>Tax Calculation Dashboard</h1>
         <form onSubmit={calculateTax}>
           <div>
             <label htmlFor="income">Income:</label>
@@ -176,18 +162,18 @@ const TaxDashboard = () => {
           </button>
         </form>
         {calculatedTax !== null && (
-          <h2>Calculated Tax: BDT {calculatedTax.toFixed(2)}</h2>
+          <h2>Calculated Tax: ${calculatedTax.toFixed(2)}</h2>
         )}
       </div>
       <div style={taxListStyle}>
         <h3 style={h1Style}>Calculated Taxes by Year</h3>
-        {/* <ul>
+        <ul>
           {taxRecords.map((record, index) => (
             <li key={index}>
               Year: {record.year}, Tax: ${record.tax.toFixed(2)}, Location: {record.location}
             </li>
           ))}
-        </ul> */}
+        </ul>
       </div>
     </div>
 </div>

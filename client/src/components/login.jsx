@@ -132,7 +132,7 @@ function Login() {
           <input
             style={styles.input}
             type="email"
-            name="email" // Make sure the name is "email"
+            name="Email" // Make sure the name is "email"
             placeholder="Email"
             onChange={handleChange}
             required
