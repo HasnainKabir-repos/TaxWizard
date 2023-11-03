@@ -15,4 +15,8 @@ const connectToDatabase = (MONGO_URI) => {
     }   
 };
 
-module.exports = connectToDatabase;
+const disconnectToDatabase = () => {
+    mongoose.connection.close();
+}
+
+module.exports = {connectToDatabase, disconnectToDatabase};

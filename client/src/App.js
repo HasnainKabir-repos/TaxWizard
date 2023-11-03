@@ -3,16 +3,20 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  useLocation,
+ 
 } from "react-router-dom";
 
-import Login from "../src/components/login"
+import Login from "../src/components/login.js";
+import Signup from "/Users/shadmansakib/Desktop/TaxWizard/client/src/components/signup.js";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
+      </Routes>
+      <Routes>
+        <Route path="/signup" element={<Signup/>} />
       </Routes>
     </Router>
   );
