@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Header from './Header';
-
+import axios from 'axios';
 // const gridContainerStyle = {
 //   display: 'grid',
 //   gridTemplateColumns: '1fr 1fr',
@@ -90,18 +90,20 @@ const TaxDashboard = () => {
 
   const calculateTax = (event) => {
     event.preventDefault();
-    // Placeholder for actual tax calculation logic
-    const taxRate = 0.25; // Assume a flat tax rate for simplicity
-    const tax = parseFloat(income) * taxRate;
-    setCalculatedTax(tax);
 
-    // Add the tax record to the list
-    const newRecord = {
-      year: new Date().getFullYear(),
-      tax: tax,
-      location: selectedLocation,
-    };
-    setTaxRecords([...taxRecords, newRecord]);
+    try{
+      const data = {
+        token: localStorage.getItem("token"),
+        income: income,
+        gender: gender,
+        location: selectedLocation
+      }
+      const response = axios.post("http://localhost:9000/api/calculatetax", data);
+      console.log(response);
+    } catch (error) {
+      console.error("Error calculating tax", error);
+    }
+
   };
 
   return (
@@ -157,7 +159,7 @@ const TaxDashboard = () => {
               <option value="Sylhet">Sylhet</option>
             </select>
           </div>
-          <button type="submit" style={buttonStyle}>
+          <button type="submit" style={buttonStyle} onClick={calculateTax}>
             Calculate Tax
           </button>
         </form>

@@ -1,10 +1,12 @@
 const express = require("express");
+const checkLoggedIn = require("../middleware/isAuthenticated");
 const router = express.Router();
 
-router.post("/calculateTax", async (req, res) => {
+router.post("/calculateTax", checkLoggedIn, async (req, res) => {
   try {
     const { income, gender, location } = req.body;
-
+    const {userId} = req.user;
+    console.log(userId);
     if (typeof income !== "number" || income < 0) {
       return res.status(400).json({
         error: "Invalid income provided. Income must be a non-negative number.",
@@ -55,11 +57,19 @@ router.post("/calculateTax", async (req, res) => {
       tax = Math.max(tax, minimumTax);
     }
 
-    // Respond with the calculated tax
+    const tax_data = {
+      userid: userId,
+      income: income,
+      gender: gender,
+      location: location,
+      taxFreeIncome: taxFreeIncome,
+      taxableIncome: taxableIncome,
+      tax:tax
+    };
+
     res.json({
       message: "Tax calculated successfully.",
-      taxAmount: tax,
-      taxableIncome: taxableIncome,
+      data: tax_data
     });
 
   } catch (error) {

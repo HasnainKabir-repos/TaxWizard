@@ -2,7 +2,7 @@
 const jwt = require('jsonwebtoken');
 
 function checkLoggedIn(req, res, next) {
-  const token = localStorage.getItem("token"); 
+  const token = req.body.token; 
 
   if (!token) {
     return res.status(401).json({ message: 'Unauthorized: User not logged in' });
