@@ -6,7 +6,7 @@
     "client": "cd client && npm start",
     "server": "nodemon server.js",
     "start": "concurrently  \"npm run server\" \"npm run client\"",
-    "test": "mocha --recursive ./test"
+    "test": "mocha --recursive ./test --exit"
   },
   "words": [],
   "author": "",
