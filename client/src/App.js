@@ -8,6 +8,8 @@ import {
 
 import Login from "../src/components/login.js";
 import Signup from "../src/components/signup.js";
+import TaxDashboard from "./components/dashboard.js";
+
 
 function App() {
   return (
@@ -19,8 +21,9 @@ function App() {
         <Route path="/signup" element={<Signup/>} />
       </Routes>
       <Routes>
-        <Route path="/dashboard" element={<Hello/>} />
+        <Route path="/dashboard" element={<TaxDashboard/>} />
       </Routes>
+    
     </Router>
     
 
