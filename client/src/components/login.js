@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 
 import axios from "axios";
-import logo from "../images/logo.png";
-import backgroundImage from "../images/tax.png"; // Replace with your actual background image path
-
+import logo from "/Users/shadmansakib/Desktop/TaxWizard/client/src/images/logo.png";
+import backgroundImage from "/Users/shadmansakib/Desktop/TaxWizard/client/src/images/tax.png";
 
 function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -13,16 +12,15 @@ function Login() {
   };
 
   const handlesignupRedirect = () => {
-    // Redirect to login page
-    window.location = "/signup"; // Use your routing mechanism here
-};
+    window.location = "/signup";
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(
         "http://localhost:8000/login",
-        formData
+        formData,
       );
       if (response.data.token) {
         localStorage.setItem("_token", JSON.stringify(response.data.token));
@@ -38,14 +36,14 @@ function Login() {
 
   const styles = {
     pageWrapper: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      height: '100vh',
-      width: '100vw',
-      padding: '0 10%', // Adjust padding as needed
-      boxSizing: 'border-box',
-      background: '#7CABA1',
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      height: "100vh",
+      width: "100vw",
+      padding: "0 10%", // Adjust padding as needed
+      boxSizing: "border-box",
+      background: "#7CABA1",
     },
     container: {
       display: "flex",
@@ -56,6 +54,7 @@ function Login() {
       borderRadius: "5px",
       boxShadow: "0px 0px 8px green",
       maxWidth: "400px",
+<<<<<<< Updated upstream
       width: '100%', // Make it responsive
       background: "#e9edeb",//"#7CABA1",
     },
@@ -63,9 +62,19 @@ function Login() {
       display: 'flex',
       width: '50%',
       height: '100%',
+=======
+      width: "100%", // Make it responsive
+      background: "#7CABA1",
+    },
+    imageContainer: {
+      maxWidth: "50%", // Adjust the size as needed
+      maxHeight: "100vh",
+      width: "100%",
+      height: "100%",
+>>>>>>> Stashed changes
       backgroundImage: `url(${backgroundImage})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
+      backgroundSize: "cover",
+      backgroundPosition: "center",
     },
     // ... other styles remain unchanged
     header: {
@@ -112,8 +121,7 @@ function Login() {
       width: "99%", // Make the button a little smaller than the inputs
       backgroundColor: "#0A7B79", // Button color
     },
-    
-    
+
     h2: {
       color: "white",
       fontWeight: "bold",
@@ -122,9 +130,7 @@ function Login() {
 
   return (
     <div style={styles.pageWrapper}>
-      <div style={styles.imageContainer}>
-        {/* Background image is set via CSS in styles.imageContainer */}
-      </div>
+      <div style={styles.imageContainer}></div>
       <div style={styles.container}>
         <div style={styles.header}>
           <img src={logo} alt="Logo" style={styles.logo} />
@@ -150,9 +156,13 @@ function Login() {
           <button style={styles.button1} type="submit">
             Login
           </button>
-          <button style={styles.button2} type="button" onClick={handlesignupRedirect}>
-                          Sign Up
-                        </button>
+          <button
+            style={styles.button2}
+            type="button"
+            onClick={handlesignupRedirect}
+          >
+            Sign Up
+          </button>
         </form>
       </div>
     </div>

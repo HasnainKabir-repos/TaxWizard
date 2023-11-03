@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import PasswordStrengthBar from 'react-password-strength-bar';
-import logo from "../images/logo.png";
-import backgroundImage from "../images/tax.png";
+import logo from "/Users/shadmansakib/Desktop/TaxWizard/client/src/images/logo.png";
+import backgroundImage from "/Users/shadmansakib/Desktop/TaxWizard/client/src/images/tax.png";
+
 
 
 function Signup() {

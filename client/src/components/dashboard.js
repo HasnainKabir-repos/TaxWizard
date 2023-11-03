@@ -110,8 +110,12 @@ const TaxDashboard = () => {
     <div style={pageWrapperStyle}>
     <div style={gridContainerStyle}>
       <div style={columnStyle}>
+<<<<<<< Updated upstream
         {/* <h1>Tax Calculation Dashboard</h1> */}
         <h1 style={h1Style}>Tax Calculation Dashboard</h1>
+=======
+        <h1>Tax Calculator</h1>
+>>>>>>> Stashed changes
         <form onSubmit={calculateTax}>
           <div>
             <label htmlFor="income">Income:</label>
