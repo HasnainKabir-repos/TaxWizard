@@ -1,12 +1,12 @@
 const supertest = require('supertest');
-const server = require('../../server');
+const {server, closeServer} = require('../../server');
 const app = require('../../app');
 const chai = require('chai');
 const expect = chai.expect;
 
 describe('Testing root of project', () =>{
-    after(async () => {
-        await server.close();
+    after( () => {
+         closeServer();
     });
     it("should return a 200 status code" , (done) => {
         supertest(app)
