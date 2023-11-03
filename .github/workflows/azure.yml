@@ -54,5 +54,5 @@ jobs:
         with:
           app-name: 'TaxWizard'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B872448B69DE4669A3CB3A6177DABDAB }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: .
