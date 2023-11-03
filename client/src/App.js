@@ -9,6 +9,7 @@ import {
 import Login from "../src/components/login.js";
 import Signup from "../src/components/signup.js";
 import TaxDashboard from "./components/dashboard.js";
+import About from "../src/components/About.js";
 
 
 function App() {
@@ -23,6 +24,9 @@ function App() {
       <Routes>
         <Route path="/dashboard" element={<TaxDashboard/>} />
       </Routes>
+      <Routes>
+        <Route path="/about" element={<About/>} />
+      </Routes> 
     
     </Router>
     

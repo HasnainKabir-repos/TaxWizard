@@ -55,7 +55,7 @@ function Signup() {
             width: '50%',
             height: '100%',
             backgroundImage: `url(${backgroundImage})`,
-            backgroundSize: 'contain',
+            backgroundSize: 'cover',
             backgroundPosition: 'center',
         },
         formSide: {
@@ -121,11 +121,41 @@ function Signup() {
         h2: {
             color: 'white',
             fontWeight: 'bold'
-        }
+        },
+
+        // Add these media queries at the bottom of your styles object
+
+//... rest of your styles
+
+// Responsive Styles
+'@media (max-width: 768px)': {
+    imageSide: {
+      display: 'none', // Hide the image side on small screens
+    },
+    formSide: {
+      width: '100%', // Have the form take the full width on small screens
+    },
+    container: {
+      margin: '0 auto', // Center the form container on small screens
+      padding: '20px', // Reduce padding on small screens
+      boxShadow: 'none', // Optionally remove the box shadow on small screens
+    },
+    input: {
+      width: 'calc(100% - 30px)', // Adjust width for smaller screens
+    },
+    button1: {
+      width: 'calc(100% - 30px)', // Adjust button width for smaller screens
+    },
+    button2: {
+      width: 'calc(100% - 30px)', // Adjust button width for smaller screens
+    },
+  },
+  
     }
 
     return (
         <div style={styles.pageWrapper}>
+
             <div style={styles.imageSide}>
                 {/* Background image is set via CSS in styles.imageSide */}
             </div>
