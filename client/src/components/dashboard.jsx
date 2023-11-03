@@ -104,6 +104,7 @@ const TaxDashboard = () => {
           gender,
           location: selectedLocation,
         }),
+        
       });
 
       if (!response.ok) {

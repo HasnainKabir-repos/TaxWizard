@@ -2,10 +2,12 @@ const express = require("express");
 const router = express.Router();
 const Tax = require('../models/Tax.model'); 
 const User = require('../models/User.model');
+const checkLoggedIn = require('../middleware/isAuthenticated');
 
-router.post("/calculateTax", async (req, res) => {
+router.post("/calculateTax", checkLoggedIn, async (req, res) => {
   try {
-    const { income, gender, location, userId } = req.body;
+    const { income, gender, location} = req.body;
+    const { userinfo } = req.user;
 
     if (typeof income !== "number" || income < 0) {
       return res.status(400).json({
@@ -35,7 +37,7 @@ router.post("/calculateTax", async (req, res) => {
     let tax = 0;
 
     // Check if the user exists
-    const user = await User.findById(userId);
+    const user = await User.findONe({Email: userinfo.Email});
     if (!user) {
       return res.status(404).json({ error: "User not found." });
     }

@@ -24,7 +24,7 @@ function Login() {
       );
       console.log(response);
       if (response.data) {
-
+        localStorage.setItem("token", JSON.stringify(response.data.data));
         console.log("Login successful!");
         window.location = "/dashboard";
       } else {

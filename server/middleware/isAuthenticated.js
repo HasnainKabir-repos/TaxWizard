@@ -2,18 +2,19 @@
 const jwt = require('jsonwebtoken');
 
 function checkLoggedIn(req, res, next) {
-  const token = req.cookies.token; 
+  const token = localStorage.getItem("token"); 
 
   if (!token) {
     return res.status(401).json({ message: 'Unauthorized: User not logged in' });
   }
 
-  jwt.verify(token, 'your-secret-key', (err, decoded) => {
+  jwt.verify(token, process.env.JWTPRIVATEKEY, (err, decoded) => {
     if (err) {
       return res.status(401).json({ message: 'Unauthorized: Invalid token' });
     }
 
     req.user = decoded; 
+    console.log(decoded);
     next();
   });
 }

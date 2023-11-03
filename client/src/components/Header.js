@@ -28,7 +28,9 @@ import React, { useState } from 'react';
 import './Header.css';
 const Header = () => {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
-
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+  }
   return (
     <header className="header">
       <div className="logo">
@@ -44,7 +46,7 @@ const Header = () => {
         <a href="/dashboard">Dashboard</a>
         <a href="/about">About</a>
         <a href="/profile">Profile</a>
-        <a href="/">Logout</a>
+        <a href="/" onClick={() => handleLogout()}>Logout</a>
       </nav>
     </header>
   );

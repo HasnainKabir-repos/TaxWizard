@@ -35,10 +35,6 @@ const findUser = async(req) => {
     return user;
 };
 
-const logout = async(req, res) => {
-    res.clearCookie('jwt');
-    res.status(200).send({message: "Logged out successfully"});
-};
 
 const loginUser = async(req, res) => {
     try {
@@ -60,8 +56,6 @@ const loginUser = async(req, res) => {
           return res.status(400).send({ message: "Invalid Password" });
         }
         const token = generateAuthToken(user);
-        res.cookie('jwt', token, { httpOnly: true });
-        
         res.status(200).send({ data: token, message: "Login Successful" });
       } catch (error) {
         console.log(error); 
@@ -115,5 +109,4 @@ module.exports = {
     generateHashPassword,
     signupUser,
     validateEmailPass,
-    logout
 };

@@ -26,15 +26,5 @@ describe('Authentication API Endpoints', () => {
       });
   });
 
-  it('should log out a user', () => {
-    
-      supertest(app)
-      .get('/api/auth/logout')
-      .expect(200)
-      .end((err, res) => {
-        expect(res.body).to.have.property('message', 'Logged out successfully');
-        
-      });
-  });
 });
 

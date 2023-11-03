@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
+  Navigate
  
 } from "react-router-dom";
 
@@ -13,24 +14,21 @@ import About from "../src/components/About.js";
 
 
 function App() {
+  const user = localStorage.getItem("token");
+
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-      </Routes>
-      <Routes>
         <Route path="/signup" element={<Signup/>} />
-      </Routes>
-      <Routes>
-        <Route path="/dashboard" element={<TaxDashboard/>} />
-      </Routes>
-      <Routes>
-        <Route path="/about" element={<About/>} />
+      
+        {user && <Route path="/dashboard" element={<TaxDashboard/>} />}
+        {user && <Route path="/about" element={<About/>} />}
+        <Route path="/dashboard" element={<Navigate replace to="/" />} />
+        <Route path="/about" element={<Navigate replace to="/" />}/>
       </Routes> 
-    
+      
     </Router>
-    
-
 
     );
 }

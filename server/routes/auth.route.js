@@ -4,5 +4,4 @@ const {signupUser, loginUser, logout} = require('../controller/authentication.co
 
 router.post('/signup', signupUser);
 router.post('/login',loginUser);
-router.get('/logout', logout)
 module.exports = router;
