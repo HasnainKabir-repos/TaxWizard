@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 
 import Login from "../src/components/login.js";
-import Signup from "/Users/shadmansakib/Desktop/TaxWizard/client/src/components/signup.js";
+import Signup from "../src/components/signup.js";
 
 function App() {
   return (
