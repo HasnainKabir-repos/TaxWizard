@@ -18,6 +18,11 @@ function Signup() {
         }
     }
 
+    const handleLoginRedirect = () => {
+        // Redirect to login page
+        window.location = "/"; // Use your routing mechanism here
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!emailValid) {
@@ -83,15 +88,35 @@ function Signup() {
             borderRadius: '5px',
             width: '90%'
         },
-        button: {
-            padding: '10px 20px',
-            background: '#333333',
-            color: '#fff',
-            borderRadius: '5px',
-            border: 'none',
-            cursor: 'pointer',
-            marginTop: '20px'
-        },
+        button1: {
+            padding: "8px 16px", // Adjusted padding
+            background: "transparent", // Transparent background
+            color: "white", // Text color
+            fontWeight: "bold", // Bold text
+            fontSize: "1.1rem", // Slightly larger font size
+            borderRadius: "5px",
+            border: "2px solid white", // White border
+            cursor: "pointer",
+            marginTop: "10px",
+            marginBottom: "10px",
+            width: "99%", // Make the button a little smaller than the inputs
+            backgroundColor: "#0A7B79", // Button color
+          },
+          button2: {
+            padding: "8px 16px", // Adjusted padding
+            background: "transparent", // Transparent background
+            color: "white", // Text color
+            fontWeight: "bold", // Bold text
+            fontSize: "1.1rem", // Slightly larger font size
+            borderRadius: "5px",
+            border: "2px solid white", // White border
+            cursor: "pointer",
+            marginTop: "10px",
+            marginBottom: "10px",
+            width: "99%", // Make the button a little smaller than the inputs
+            backgroundColor: "#0A7B79", // Button color
+          },
+           
         h2: {
             color: 'white',
             fontWeight: 'bold'
@@ -113,7 +138,10 @@ function Signup() {
                 {!emailValid && <p style={{ color: 'red' }}>Invalid email format</p>}
                 <input style={styles.input} type="password" name="password" placeholder="Password" onChange={handleChange} required />
                 <PasswordStrengthBar password={formData.password} />
-                <button style={styles.button} type="submit">Signup</button>
+                <button style={styles.button1} type="submit">Signup</button>
+                <button style={styles.button2} type="button" onClick={handleLoginRedirect}>
+                            Login
+                        </button>
                 
             </form>
                 </div>
