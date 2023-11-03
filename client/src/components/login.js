@@ -11,6 +11,11 @@ function Login() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handlesignupRedirect = () => {
+    // Redirect to login page
+    window.location = "/signup"; // Use your routing mechanism here
+};
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -79,16 +84,36 @@ function Login() {
       borderRadius: "5px",
       width: "90%",
     },
-    button: {
-      padding: "10px 20px",
-      background: "#333333",
-      color: "#fff",
+    button1: {
+      padding: "8px 16px", // Adjusted padding
+      background: "transparent", // Transparent background
+      color: "white", // Text color
+      fontWeight: "bold", // Bold text
+      fontSize: "1.1rem", // Slightly larger font size
       borderRadius: "5px",
-      border: "none",
+      border: "2px solid white", // White border
       cursor: "pointer",
       marginTop: "10px",
       marginBottom: "10px",
+      width: "99%", // Make the button a little smaller than the inputs
+      backgroundColor: "#0A7B79", // Button color
     },
+    button2: {
+      padding: "8px 16px", // Adjusted padding
+      background: "transparent", // Transparent background
+      color: "white", // Text color
+      fontWeight: "bold", // Bold text
+      fontSize: "1.1rem", // Slightly larger font size
+      borderRadius: "5px",
+      border: "2px solid white", // White border
+      cursor: "pointer",
+      marginTop: "10px",
+      marginBottom: "10px",
+      width: "99%", // Make the button a little smaller than the inputs
+      backgroundColor: "#0A7B79", // Button color
+    },
+    
+    
     h2: {
       color: "white",
       fontWeight: "bold",
@@ -122,12 +147,12 @@ function Login() {
             onChange={handleChange}
             required
           />
-          <button style={styles.button} type="submit">
+          <button style={styles.button1} type="submit">
             Login
           </button>
-          <button style={styles.button} type="button">
-            Sign Up
-          </button>
+          <button style={styles.button2} type="button" onClick={handlesignupRedirect}>
+                          Sign Up
+                        </button>
         </form>
       </div>
     </div>
