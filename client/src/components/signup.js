@@ -31,7 +31,7 @@ function Signup() {
             return;
         }
         try {
-            const response = await axios.post('http://localhost:8000//signup', formData);
+            const response = await axios.post('http://localhost:9000/api/authsignup', formData);
             console.log(response.data);
             if (response.data.token) {
                 console.log("Signup successful!");

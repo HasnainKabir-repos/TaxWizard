@@ -4,6 +4,7 @@ import axios from "axios";
 import logo from "/Users/shadmansakib/Desktop/TaxWizard/client/src/images/logo.png";
 import backgroundImage from "/Users/shadmansakib/Desktop/TaxWizard/client/src/images/tax.png";
 
+
 function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
 
@@ -19,13 +20,13 @@ function Login() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8000/login",
+        "http://localhost:9000/api/auth/login",
         formData,
       );
       if (response.data.token) {
         localStorage.setItem("_token", JSON.stringify(response.data.token));
         console.log("Login successful!");
-        window.location = "/profile";
+        window.location = "/dashboard";
       } else {
         console.log("Login failed!");
       }
@@ -54,24 +55,14 @@ function Login() {
       borderRadius: "5px",
       boxShadow: "0px 0px 8px green",
       maxWidth: "400px",
-<<<<<<< Updated upstream
-      width: '100%', // Make it responsive
-      background: "#e9edeb",//"#7CABA1",
-    },
-    imageContainer: {
-      display: 'flex',
-      width: '50%',
-      height: '100%',
-=======
       width: "100%", // Make it responsive
-      background: "#7CABA1",
+      background: "#e9edeb",
     },
     imageContainer: {
-      maxWidth: "50%", // Adjust the size as needed
+      maxWidth: "100%%", // Adjust the size as needed
       maxHeight: "100vh",
       width: "100%",
       height: "100%",
->>>>>>> Stashed changes
       backgroundImage: `url(${backgroundImage})`,
       backgroundSize: "cover",
       backgroundPosition: "center",
