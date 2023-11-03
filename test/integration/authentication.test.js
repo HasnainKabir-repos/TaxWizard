@@ -17,7 +17,7 @@ describe('Authentication API Endpoints', () => {
       supertest(app)
       .post('/api/auth/login')
       .send({
-        Email: 'mamunur@iut-dhaka.edu', // Use the username created in the previous test case
+        Email: 'mamunur@iut-dhaka.edu', 
         Password: 'Mamunur1234@',
       }).expect(200)
       .end((err, res) => {
@@ -25,6 +25,18 @@ describe('Authentication API Endpoints', () => {
         
       });
   });
+  it('should not login an invalid user', () => {
+    
+    supertest(app)
+    .post('/api/auth/login')
+    .send({
+      Email: 'mamunur@iut-dhaka.edu', 
+      Password: 'invalidPassword',
+    }).expect(400)
+    .end((err, res) => {
+      
+    });
+});
 
 });
 
