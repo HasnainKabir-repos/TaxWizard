@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
+import logo from "../images/logo.png";
+import backgroundImage from "../images/tax.png"; // Replace with your actual background image path
+
 
 function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -12,16 +15,13 @@ function Login() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8000/login", // Remove extra slashes
+        "http://localhost:8000/login",
         formData
       );
       if (response.data.token) {
-        localStorage.setItem(
-          "_token",
-          JSON.stringify(response.data.token)
-        );
+        localStorage.setItem("_token", JSON.stringify(response.data.token));
         console.log("Login successful!");
-        window.location = "/profile"; // Remove extra slashes
+        window.location = "/profile";
       } else {
         console.log("Login failed!");
       }
@@ -31,31 +31,46 @@ function Login() {
   };
 
   const styles = {
-    page: {
-      display: "flex",
-      justifyContent: "center", // Center horizontally
-      alignItems: "center", // Center vertically
-      height: "100vh", // Make the page take up the full viewport height
+    pageWrapper: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      height: '100vh',
+      width: '100vw',
+      padding: '0 10%', // Adjust padding as needed
+      boxSizing: 'border-box',
+      background: '#7CABA1',
     },
     container: {
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
       padding: "20px",
-      border: "1px solid white", // White border
+      border: "1px solid white",
       borderRadius: "5px",
-      boxShadow: "0px 0px 8px white", // White shadow background
+      boxShadow: "0px 0px 8px white",
       maxWidth: "400px",
-      background: "#7CABA1", // Original background color
+      width: '100%', // Make it responsive
+      background: "#7CABA1",
     },
+    imageContainer: {
+      maxWidth: "50%", // Adjust the size as needed
+      maxHeight: "100vh",
+      width: '100%',
+      height: '100%',
+      backgroundImage: `url(${backgroundImage})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    },
+    // ... other styles remain unchanged
     header: {
       display: "flex",
-      flexDirection: "column", // Place logo and title in a column
-      alignItems: "center", // Center elements horizontally
+      flexDirection: "column",
+      alignItems: "center",
       marginBottom: "20px",
     },
     logo: {
-      width: "50px", // Adjust the width of the logo as needed
+      width: "150px",
       height: "auto",
     },
     input: {
@@ -71,8 +86,8 @@ function Login() {
       borderRadius: "5px",
       border: "none",
       cursor: "pointer",
-      marginTop: "10px", // Adjust the margin between buttons
-      marginBottom: "10px", // Add margin at the bottom of the button
+      marginTop: "10px",
+      marginBottom: "10px",
     },
     h2: {
       color: "white",
@@ -80,13 +95,14 @@ function Login() {
     },
   };
 
-
   return (
-    <div style={styles.page}>
+    <div style={styles.pageWrapper}>
+      <div style={styles.imageContainer}>
+        {/* Background image is set via CSS in styles.imageContainer */}
+      </div>
       <div style={styles.container}>
         <div style={styles.header}>
-          {/* Add your logo here */}
-          <img src="/images/logo.png" alt="Logo" style={styles.logo} />
+          <img src={logo} alt="Logo" style={styles.logo} />
           <h2 style={styles.h2}>Login</h2>
         </div>
         <form onSubmit={handleSubmit}>
