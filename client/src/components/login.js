@@ -1,5 +1,14 @@
 import React, { useState } from "react";
+
 import axios from "axios";
+import logo from "../images/logo.png";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+ 
+} from "react-router-dom";
+
 
 function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -12,7 +21,7 @@ function Login() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8080/login",
+        "http://localhost:8000/login", // Remove extra slashes
         formData
       );
       if (response.data.token) {
@@ -82,31 +91,40 @@ function Login() {
 
 
   return (
-    <div style={styles.container}>
-      <h2 style={styles.h2}> Login</h2>
-      <formdsf onSubmit={handleSubmit}>
-        <input
-          style={styles.input}
-          type="email"
-          name="email"
-          placeholder="Email"
-          onChange={handleChange}
-          required
-        />
-        <input
-          style={styles.input}
-          type="password"
-          name="password"
-          placeholder="Password"
-          onChange={handleChange}
-          required
-        />
-        <button style={styles.button} type="submit">
-          Login
-        </button>
-      </formdsf>
+    <div style={styles.page}>
+      <div style={styles.container}>
+        <div style={styles.header}>
+          {/* Add your logo here */}
+          <img src="/images/logo.png" alt="Logo" style={styles.logo} />
+          <h2 style={styles.h2}>Login</h2>
+        </div>
+        <form onSubmit={handleSubmit}>
+          <input
+            style={styles.input}
+            type="email"
+            name="email"
+            placeholder="Email"
+            onChange={handleChange}
+            required
+          />
+          <input
+            style={styles.input}
+            type="password"
+            name="password"
+            placeholder="Password"
+            onChange={handleChange}
+            required
+          />
+          <button style={styles.button} type="submit">
+            Login
+          </button>
+          
+          <button style={styles.button} type="button">
+            Sign Up
+          </button>
+        </form>
+      </div>
     </div>
-
   );
 }
 

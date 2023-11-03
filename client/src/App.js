@@ -7,7 +7,8 @@ import {
 } from "react-router-dom";
 
 import Login from "../src/components/login.js";
-import Signup from "/Users/shadmansakib/Desktop/TaxWizard/client/src/components/signup.js";
+import Signup from "../src/components/signup.js";
+import Hello from "/Users/shadmansakib/Desktop/TaxWizard/client/src/components/dashboard.js";
 
 function App() {
   return (
@@ -18,7 +19,12 @@ function App() {
       <Routes>
         <Route path="/signup" element={<Signup/>} />
       </Routes>
+      <Routes>
+        <Route path="/dashboard" element={<Hello/>} />
+      </Routes>
     </Router>
+    
+
   );
 }
 export default App;
