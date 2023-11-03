@@ -131,7 +131,7 @@ function Login() {
         <form onSubmit={handleSubmit}>
           <input
             style={styles.input}
-            type="email"
+            type="text"
             name="Email" // Make sure the name is "email"
             placeholder="Email"
             onChange={handleChange}
