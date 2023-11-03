@@ -33,4 +33,4 @@ jobs:
       run: echo "_MONGO_URI=${{ secrets._MONGO_URI }}" >> $GITHUB_ENV
 
     - name: Run test cases
-      run: npm test --if-present
+      run: npm test 
