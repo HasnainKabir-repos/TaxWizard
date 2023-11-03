@@ -6,7 +6,7 @@ import {
   useLocation,
 } from "react-router-dom";
 
-import Login from "/Users/shadmansakib/Desktop/TaxWizard/client/src/components/login.js";
+import Login from "../src/components/login"
 
 function App() {
   return (
