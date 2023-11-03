@@ -6,9 +6,9 @@ import {
  
 } from "react-router-dom";
 
-import Login from "../src/components/login.js";
-import Signup from "../src/components/signup.js";
-import TaxDashboard from "./components/dashboard.js";
+import Login from "../src/components/login.jsx";
+import Signup from "../src/components/signup.jsx";
+import TaxDashboard from "./components/dashboard.jsx";
 import About from "../src/components/About.js";
 
 

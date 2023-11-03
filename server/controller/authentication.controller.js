@@ -61,6 +61,7 @@ const loginUser = async(req, res) => {
         }
         const token = generateAuthToken(user);
         res.cookie('jwt', token, { httpOnly: true });
+        
         res.status(200).send({ data: token, message: "Login Successful" });
       } catch (error) {
         console.log(error); 

@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 
 import axios from "axios";
-import logo from "/Users/shadmansakib/Desktop/TaxWizard/client/src/images/logo.png";
-import backgroundImage from "/Users/shadmansakib/Desktop/TaxWizard/client/src/images/tax.png";
+import logo from "../images/logo.png";
+import backgroundImage from "../images/tax.png";
 
 
 function Login() {
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [formData, setFormData] = useState({ Email: "", Password: "" });
 
   const handleChange = (e) => {
+    e.preventDefault();
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -23,8 +24,9 @@ function Login() {
         "http://localhost:9000/api/auth/login",
         formData,
       );
-      if (response.data.token) {
-        localStorage.setItem("_token", JSON.stringify(response.data.token));
+      console.log(response);
+      if (response.data) {
+
         console.log("Login successful!");
         window.location = "/dashboard";
       } else {
@@ -131,7 +133,7 @@ function Login() {
           <input
             style={styles.input}
             type="email"
-            name="email"
+            name="Email"
             placeholder="Email"
             onChange={handleChange}
             required
@@ -139,7 +141,7 @@ function Login() {
           <input
             style={styles.input}
             type="password"
-            name="password"
+            name="Password"
             placeholder="Password"
             onChange={handleChange}
             required

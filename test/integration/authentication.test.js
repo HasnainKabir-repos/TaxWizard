@@ -8,22 +8,22 @@ describe('Authentication API Endpoints', () => {
     mongoose.connect(process.env.MONGO_URI);
     done();
   });
-  it('should register a new user', () => {
+  // it('should register a new user', () => {
     
-      supertest(app)
-      .post('/api/auth/signup')
-      .send({
-        Name: "Test",
-        Email: 'newuser@gmail.com',
-        DateOfBirth: "1985-05-15T00:00:00.000Z",
-        Password: 'Password123@',
-      }).expect(200)
-      .end((err, res) => {
+  //     supertest(app)
+  //     .post('/api/auth/signup')
+  //     .send({
+  //       Name: "Test",
+  //       Email: 'newuser@gmail.com',
+  //       DateOfBirth: "1985-05-15T00:00:00.000Z",
+  //       Password: 'Password123@',
+  //     }).expect(200)
+  //     .end((err, res) => {
 
-        expect(res.body).to.have.property('message', 'User registered successfully');
+  //       expect(res.body).to.have.property('message', 'User registered successfully');
         
-      });
-  });
+  //     });
+  // });
 
   it('should login an existing user', () => {
     

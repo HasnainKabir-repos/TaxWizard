@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import PasswordStrengthBar from 'react-password-strength-bar';
-import logo from "/Users/shadmansakib/Desktop/TaxWizard/client/src/images/logo.png";
-import backgroundImage from "/Users/shadmansakib/Desktop/TaxWizard/client/src/images/tax.png";
+import logo from "../images/logo.png";
+import backgroundImage from "../images/tax.png";
 
 
 
 function Signup() {
-    const [formData, setFormData] = useState({ name: '',dob: '', email: '', password: '' });
+    const [formData, setFormData] = useState({ Name: '', DateOfBirth: '', Email: '', Password: '' });
     const [emailValid, setEmailValid] = useState(true);
 
 
 
     const handleChange = (e) => {
+        e.preventDefault();
         setFormData({ ...formData, [e.target.name]: e.target.value });
 
-        if (e.target.name === 'email') {
+        if (e.target.name === 'Email') {
             const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
             setEmailValid(emailRegex.test(e.target.value));
         }
@@ -33,11 +34,11 @@ function Signup() {
             return;
         }
         try {
-            const response = await axios.post('http://localhost:9000/api/authsignup', formData);
+            const response = await axios.post('http://localhost:9000/api/auth/signup', formData);
             console.log(response.data);
-            if (response.data.token) {
+            if (response.data) {
                 console.log("Signup successful!");
-                window.location = "//login";
+                window.location = "/login";
             } else {
                 console.log("Signup failed!");
             }
@@ -175,7 +176,7 @@ function Signup() {
                     <img src={logo} alt="Logo" style={styles.logo} />
                     <h2 style={styles.h2}> Sign Up</h2>
                     <form onSubmit={handleSubmit}>
-                <input style={styles.input} type="text" name="name" placeholder="Name" onChange={handleChange} required />
+                <input style={styles.input} type="text" name="Name" placeholder="Name" onChange={handleChange} required />
                                 {/* <input
                     style={styles.input}
                     type="date"
@@ -187,17 +188,17 @@ function Signup() {
                                 <input
                 style={styles.input}
                 type="date"
-                name="dob"
+                name="DateOfBirth"
                 placeholder="Date of Birth (YYYY-MM-DD)"
                 onChange={handleChange}
-                value={formData.dob}
+                value={formData.DateOfBirth}
                 required
                 />
 
-                <input style={styles.input} type="email" name="email" placeholder="Email" onChange={handleChange} required />
+                <input style={styles.input} type="email" name="Email" placeholder="Email" onChange={handleChange} required />
                 {!emailValid && <p style={{ color: 'red' }}>Invalid email format</p>}
-                <input style={styles.input} type="password" name="password" placeholder="Password" onChange={handleChange} required />
-                <PasswordStrengthBar password={formData.password} />
+                <input style={styles.input} type="password" name="Password" placeholder="Password" onChange={handleChange} required />
+                <PasswordStrengthBar password={formData.Password} />
                 <button style={styles.button1} type="submit">Signup</button>
                 <button style={styles.button2} type="button" onClick={handleLoginRedirect}>
                             Login
