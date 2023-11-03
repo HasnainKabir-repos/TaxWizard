@@ -14,12 +14,12 @@ const {
 } = require("../../server/controller/authentication.controller");
 
 describe("authentication bcrypt controller", () => {
-  test("should generate a salt", async () => {
+  it("should generate a salt", async () => {
     const salt = await generateSalt();
     expect(salt).to.be.a("string");
   });
 
-  test("should generate a hashed password", async () => {
+  it("should generate a hashed password", async () => {
     const salt = await generateSalt();
     const req = {
       body: {
@@ -32,7 +32,7 @@ describe("authentication bcrypt controller", () => {
 });
 
 describe("generateAuthToken", () => {
-  test("should generate a valid JWT token", () => {
+  it("should generate a valid JWT token", () => {
     const user = { _id: "someUserId" };
     const token = generateAuthToken(user);
 
@@ -44,7 +44,7 @@ describe("generateAuthToken", () => {
 });
 
 describe("validateSignUp", () => {
-  test("should validate a valid signup data object", () => {
+  it("should validate a valid signup data object", () => {
     const validUserData = {
       Name: "John Doe",
       Email: "john.doe@example.com",
@@ -57,7 +57,7 @@ describe("validateSignUp", () => {
     expect(error).to.be.undefined;
   });
 
-  test("should fail for invalid signup data", () => {
+  it("should fail for invalid signup data", () => {
     const invalidUserData = {
       Name: "", // Name is required
       Email: "invalid-email", // Invalid email format
@@ -71,7 +71,7 @@ describe("validateSignUp", () => {
 });
 
 describe('Login Input Validation', () => {
-    test('should validate a valid email and password', () => {
+    it('should validate a valid email and password', () => {
       const data = {
         Email: 'test@example.com',
         Password: 'password123',
@@ -83,7 +83,7 @@ describe('Login Input Validation', () => {
       expect(value).to.deep.equal(data);
     });
   
-    test('should reject invalid email format', () => {
+    it('should reject invalid email format', () => {
       const data = {
         Email: 'invalid-email',
         Password: 'password123',
@@ -95,7 +95,7 @@ describe('Login Input Validation', () => {
       expect(error.details[0].message).to.include('Email');
     });
   
-    test('should reject missing email', () => {
+    it('should reject missing email', () => {
       const data = {
         Password: 'password123',
       };
@@ -106,7 +106,7 @@ describe('Login Input Validation', () => {
       expect(error.details[0].message).to.include('Email');
     });
   
-    test('should reject missing password', () => {
+    it('should reject missing password', () => {
       const data = {
         Email: 'test@example.com',
       };
