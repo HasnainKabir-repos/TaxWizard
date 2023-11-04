@@ -14,3 +14,4 @@ const taxSchema = new Schema({
 const Tax = mongoose.model('Tax', taxSchema);
 
 module.exports = Tax;
+
