@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: false }));
 const authRoutes = require('./server/routes/auth.route');
 const taxRoutes = require('./server/routes/taxRoute.js');
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:3001","https://taxwizard-frontend.azurewebsites.net/", "http://localhost:3000"],
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type"],
   }));
